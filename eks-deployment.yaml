@@ -16,7 +16,7 @@ spec:
         - name: springboot
           image: abdulsukku/docker-new
           ports:
-            - containerPort: 8085
+            - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -26,6 +26,6 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 8085
+      targetPort: 8080
   selector:
     app: abd-springboot
