@@ -16,6 +16,11 @@ pipeline {
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'githubcred', url: 'https://github.com/AbdulShukur007/myeksapp.git']]])
             }
         }
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'           
+            }
+        }
         stage('SonarQube analysis') {
             steps{
                       withSonarQubeEnv('sonarserver') { 
@@ -30,11 +35,6 @@ pipeline {
                     // true = set pipeline to UNSTABLE, false = don't
                     waitForQualityGate abortPipeline: true
                 }
-            }
-        }
-        stage ('Build') {
-            steps {
-                sh 'mvn clean install'           
             }
         }
         stage("Docker build"){
