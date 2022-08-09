@@ -27,8 +27,9 @@ pipeline {
                       withSonarQubeEnv('sonarserver') { 
                       sh "mvn sonar:sonar"
                   }
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
+               qualitygate = waitForQualityGate()                     
+               if (qualitygate.status != "OK") {                         
+                currentBuild.result = "UNSTABLE" 
                    }
                 }
             }
