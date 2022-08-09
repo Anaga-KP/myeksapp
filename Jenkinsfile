@@ -23,16 +23,17 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps{
-               script{
                       withSonarQubeEnv('sonarserver') { 
                       sh "mvn sonar:sonar"
                   }
-               qualitygate = waitForQualityGate()                     
-               if (qualitygate.status != "OK") {                         
-                currentBuild.result = "UNSTABLE" 
-                   }
-                }
-            }
+             }
+        }
+       stage("Quality Gate") {
+            steps {
+                     timeout(time: 1, unit: 'MINUTES') {
+                     waitForQualityGate abortPipeline: true
+                  }
+             }
         }
         stage("Docker build"){
             steps{
