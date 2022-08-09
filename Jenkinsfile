@@ -24,10 +24,12 @@ pipeline {
                       }
                   }
              }
-            steps{
+        } 
+        stage("Quality gate") {
+            steps {
                 waitForQualityGate abortPipeline: true
             }
-        } 
+        }  
         stage ('Build') {
             steps {
                 sh 'mvn clean install'           
