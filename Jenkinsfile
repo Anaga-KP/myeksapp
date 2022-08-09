@@ -21,6 +21,13 @@ pipeline {
                 sh 'mvn clean install'           
             }
         }
+        stage('SonarQube analysis') {
+            steps{
+            withSonarQubeEnv('sonarserver') {
+               sh "mvn sonar:sonar"
+               }
+            }
+        } 
         stage("Docker build"){
             steps{
                 script {
