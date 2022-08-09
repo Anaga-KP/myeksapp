@@ -10,27 +10,3 @@ public class MyAwesomeSpringBootAngularJsApp {
         SpringApplication.run(MyAwesomeSpringBootAngularJsApp.class, args);
     }
 }
-
-@SpringBootApplication
-public class MyAwesomeSpringBootAngularJsApp {
-
-    public static void main(String[] args) {
-        SpringApplication.run(MyAwesomeSpringBootAngularJsApp.class, args);
-    }
-}
-
-@SpringBootApplication
-public class MyAwesomeSpringBootAngularJsApp {
-
-    public static void main(String[] args) {
-        SpringApplication.run(MyAwesomeSpringBootAngularJsApp.class, args);
-    }
-}
-
-@SpringBootApplication
-public class MyAwesomeSpringBootAngularJsApp {
-
-    public static void main(String[] args) {
-        SpringApplication.run(MyAwesomeSpringBootAngularJsApp.class, args);
-    }
-}
