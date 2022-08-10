@@ -29,3 +29,4 @@ spec:
       targetPort: 8085
   selector:
     app: abd-springboot
+    
