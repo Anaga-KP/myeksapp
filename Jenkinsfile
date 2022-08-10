@@ -13,12 +13,15 @@ pipeline {
     stages {
         stage('Cloning Git') {
             steps {
-                    checkout([$class: 'GitSCM', branches: [
-                                                          [name: '*/main']
-                                                          ],
+                    checkout([$class: 'GitSCM', 
+                              branches: [
+                                            [name: '*/main']
+                                        ],
                               extensions: [], 
                               userRemoteConfigs: [
-                                                 [credentialsId: 'githubcred', url: 'https://github.com/AbdulShukur007/myeksapp.git']
+                                                    [credentialsId: 'githubcred', 
+                                                     url: 'https://github.com/AbdulShukur007/myeksapp.git'
+                                                    ]
                                                  ]
                              ])
             }
@@ -52,10 +55,10 @@ pipeline {
                  
               credentialsId: 'nexus', 
               groupId: 'com.tcs.angularjs', 
-              nexusUrl: '172.31.9.174', 
+              nexusUrl: '172.31.9.174:8081', 
               nexusVersion: 'nexus3', 
               protocol: 'http', 
-              repository: 'http://44.202.188.182:8081/repository/myeksapp/', version: '0.0.1'
+              repository: 'http://44.202.188.182:8081/repository/myeksapp', version: '0.0.1'
            }
         }
         stage("Docker build"){
