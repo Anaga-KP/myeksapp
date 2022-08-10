@@ -49,7 +49,7 @@ pipeline {
               nexusArtifactUploader artifacts: [
                              [artifactId: 'springbootApp',
                               classifier: '', 
-                              file: 'target/MyAwesomeApp-0.0.1.war', 
+                              file: 'target/springbootApp-0.0.1.war', 
                               type: 'war']
               ], 
                  
