@@ -58,7 +58,8 @@ pipeline {
               nexusUrl: '172.31.9.174:8081', 
               nexusVersion: 'nexus3', 
               protocol: 'http', 
-              repository: 'http://44.202.188.182:8081/repository/myeksapp', version: '0.0.1'
+              repository: 'myeksapp', 
+              version: '0.0.1'
            }
         }
         stage("Docker build"){
