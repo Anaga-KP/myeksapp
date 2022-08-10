@@ -91,7 +91,7 @@ pipeline {
         stage("Push Image to Nexus Hub"){
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( 'http://'+registry, registryCredential ) {
                     dockerImage.push("$BUILD_NUMBER")
                     dockerImage.push('latest')
                     }
