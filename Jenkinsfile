@@ -47,19 +47,19 @@ pipeline {
         stage('Push to Nexus'){
            steps { 
               nexusArtifactUploader artifacts: [
-                             [artifactId: 'springbootApp',
+                             [artifactId: '${POM_ARTIFACTID}',
                               classifier: '', 
-                              file: 'target/springbootApp-0.0.1.war', 
-                              type: 'war']
+                              file: '${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}', 
+                              type: '${POM_PACKAGING}']
               ], 
                  
               credentialsId: 'nexus', 
-              groupId: 'com.tcs.angularjs', 
+              groupId: '${POM_GROUPID}', 
               nexusUrl: '172.31.9.174:8081', 
               nexusVersion: 'nexus3', 
               protocol: 'http', 
               repository: 'myeksapp', 
-              version: '0.0.1'
+              version: '${POM_VERSION}'
            }
         }
         stage("Docker build"){
