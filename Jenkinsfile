@@ -77,7 +77,8 @@ pipeline {
                             ]
                         );
                     } 
-               }    
+               }  
+           }  
         }
         stage("Docker build"){
             steps{
@@ -108,4 +109,4 @@ pipeline {
       
     }
  }
-}
+
