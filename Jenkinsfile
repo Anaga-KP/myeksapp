@@ -4,7 +4,7 @@ pipeline {
     }
     
     agent any
-  //  environment {     
+    environment {     
             imagename = "abdulsukku/docker-new"
             registryCredential = 'dockerpass'
             dockerImage = ''    
@@ -13,7 +13,14 @@ pipeline {
     stages {
         stage('Cloning Git') {
             steps {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'githubcred', url: 'https://github.com/AbdulShukur007/myeksapp.git']]])
+                    checkout([$class: 'GitSCM', branches: [
+                                                          [name: '*/main']
+                                                          ],
+                              extensions: [], 
+                              userRemoteConfigs: [
+                                                 [credentialsId: 'githubcred', url: 'https://github.com/AbdulShukur007/myeksapp.git']
+                                                 ]
+                             ])
             }
         }
         stage('SonarQube analysis'){
@@ -51,14 +58,14 @@ pipeline {
               repository: 'http://44.202.188.182:8081/repository/myeksapp/', version: '0.0.1'
            }
         }
-//        stage("Docker build"){
+        stage("Docker build"){
             steps{
                 script {
                     dockerImage = docker.build imagename
                 }
             }
         }
-   //     stage("Push Image to Docker Hub"){
+        stage("Push Image to Docker Hub"){
             steps{
                 script {
                     docker.withRegistry( '', registryCredential ) {
@@ -68,7 +75,7 @@ pipeline {
                 }
             }
         }
-      //  stage("kubernetes deployment"){
+        stage("kubernetes deployment"){
             steps{
                 script {
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8s', namespace: '', serverUrl: '') {
