@@ -2,7 +2,6 @@ pipeline {
    tools {
         maven 'Maven3'
     }
-    
     agent any
     environment {     
             imagename = "abdulsukku/docker-new"
@@ -14,7 +13,6 @@ pipeline {
             NEXUS_REPOSITORY = "myeksapp"
             NEXUS_CREDENTIAL_ID = "nexus"
     } 
-   
     stages {
         stage('Cloning Git') {
             steps {
@@ -110,3 +108,4 @@ pipeline {
       
     }
  }
+}
