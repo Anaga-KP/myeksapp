@@ -7,7 +7,12 @@ pipeline {
     environment {     
             imagename = "abdulsukku/docker-new"
             registryCredential = 'dockerpass'
-            dockerImage = ''    
+            dockerImage = ''  
+            NEXUS_VERSION = "nexus3"
+            NEXUS_PROTOCOL = "http"
+            NEXUS_URL = "172.31.9.174:8081"
+            NEXUS_REPOSITORY = "myeksapp"
+            NEXUS_CREDENTIAL_ID = "nexus"
     } 
    
     stages {
@@ -45,22 +50,36 @@ pipeline {
             }
         }
         stage('Push to Nexus'){
-           steps { 
-              nexusArtifactUploader artifacts: [
-                             [artifactId: '${POM_ARTIFACTID}',
-                              classifier: '', 
-                              file: '${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}', 
-                              type: '${POM_PACKAGING}']
-              ], 
-                 
-              credentialsId: 'nexus', 
-              groupId: '${POM_GROUPID}', 
-              nexusUrl: '172.31.9.174:8081', 
-              nexusVersion: 'nexus3', 
-              protocol: 'http', 
-              repository: 'myeksapp', 
-              version: '${POM_VERSION}'
-           }
+           steps {
+                script {
+                    pom = readMavenPom file: "pom.xml";
+                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    artifactPath = filesByGlob[0].path;
+                    artifactExists = fileExists artifactPath;
+                    if(artifactExists) {
+                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                        nexusArtifactUploader(
+                            nexusVersion: NEXUS_VERSION,
+                            protocol: NEXUS_PROTOCOL,
+                            nexusUrl: NEXUS_URL,
+                            groupId: pom.groupId,
+                            version: pom.version,
+                            repository: NEXUS_REPOSITORY,
+                            credentialsId: NEXUS_CREDENTIAL_ID,
+                            artifacts: [
+                                [artifactId: pom.artifactId,
+                                classifier: '',
+                                file: artifactPath,
+                                type: pom.packaging],
+                                [artifactId: pom.artifactId,
+                                classifier: '',
+                                file: "pom.xml",
+                                type: "pom"]
+                            ]
+                        );
+                    } 
+               }    
         }
         stage("Docker build"){
             steps{
