@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: abdulsukku/docker-new:latest
+          image: abdulsukku/my-app:latest
           ports:
             - containerPort: 8085
 ---
