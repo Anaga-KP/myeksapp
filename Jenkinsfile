@@ -26,19 +26,6 @@ pipeline {
                 sh 'mvn clean install'           
             }
         }
-        stage('SonarQube analysis'){
-              steps{
-                     script{
-                         withSonarQubeEnv('sonarserver') { 
-                         sh "mvn sonar:sonar"
-                              }
-                         timeout(time: 1, unit: 'HOUR') {
-                              waitForQualityGate abortPipeline: true
-                              }
-                         
-                      }
-               }
-        }
         stage('Push to Nexus'){
            steps {
                 script {
@@ -73,6 +60,19 @@ pipeline {
                     }
                }  
            }  
+        }
+        stage('SonarQube analysis'){
+              steps{
+                     script{
+                         withSonarQubeEnv('sonarserver') { 
+                         sh "mvn sonar:sonar"
+                              }
+                         timeout(time: 2, unit: 'MINUTES') {
+                              waitForQualityGate abortPipeline: true
+                              }
+                         
+                      }
+               }
         }
         stage("Docker build"){
             steps{
