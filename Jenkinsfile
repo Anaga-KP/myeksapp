@@ -18,23 +18,13 @@ pipeline {
     stages {
         stage('Cloning Git') {
             steps {
-                    checkout([$class: 'GitSCM', 
-                              branches: [
-                                            [name: '*/main']
-                                        ],
-                              extensions: [], 
-                              userRemoteConfigs: [
-                                                    [credentialsId: 'git', 
-                                                     url: 'https://github.com/AbdulShukur007/myeksapp.git'
-                                                    ]
-                                                 ]
-                             ])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/AbdulShukur007/myeksapp.git']]])
             }
-        }
+        }  
         stage('SonarQube analysis'){
               steps{
                      script{
-                         withSonarQubeEnv('sonarserver') { 
+                         withSonarQubeEnv('sonar') { 
                          sh "mvn sonar:sonar"
                               }
                          timeout(time: 2, unit: 'MINUTES') {
