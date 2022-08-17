@@ -5,8 +5,8 @@ pipeline {
     }
     agent any
     environment {     
-            imagename = "my-docker-images" 
-            registryCredential = "nexus"
+            imagename = "abdulsukku/my-app"
+            registryCredential = "docker"
             dockerImage = ''
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
@@ -80,7 +80,7 @@ pipeline {
                 }
             }
         }
-        stage("Push Image to Nexus Hub"){
+        stage("Push Image to Docker Hub"){
             steps{
                 script {
                     docker.withRegistry( '', registryCredential ) {
