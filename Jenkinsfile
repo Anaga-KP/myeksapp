@@ -32,7 +32,7 @@ pipeline {
                          withSonarQubeEnv('sonarserver') { 
                          sh "mvn sonar:sonar"
                               }
-                         timeout(time: 2, unit: 'MINUTES') {
+                         timeout(time: 1, unit: 'HOUR') {
                               waitForQualityGate abortPipeline: true
                               }
                          
