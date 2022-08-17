@@ -21,6 +21,11 @@ pipeline {
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/AbdulShukur007/myeksapp.git']]])
             }
         }  
+        stage('Maven Build'){
+            steps {
+                sh 'mvn clean install'           
+            }
+        }
         stage('SonarQube analysis'){
               steps{
                      script{
@@ -33,11 +38,6 @@ pipeline {
                          
                       }
                }
-        }
-        stage('Maven Build'){
-            steps {
-                sh 'mvn clean install'           
-            }
         }
         stage('Push to Nexus'){
            steps {
