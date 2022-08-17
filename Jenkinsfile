@@ -6,8 +6,8 @@ pipeline {
     agent any
     environment {     
             imagename = "abdulsukku/docker-new"
-            registryCredential = 'nexus'
-            registry = "172.31.30.165:8084/"
+            registryCredential = "nexus"
+            registry = "172.31.30.165:8081"
             dockerImage = ''  
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
