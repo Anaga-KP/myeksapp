@@ -5,9 +5,9 @@ pipeline {
     }
     agent any
     environment {     
-            imagename = "abdulsukku/my-docker-images"
-            registryCredential = "nexus"
-            registry = "172.31.30.165:8084"
+           // imagename = "abdulsukku/my-image" 
+            registryCredential = 'nexus'
+            registry = "my-docker-images"
             dockerImage = ''  
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
@@ -77,14 +77,14 @@ pipeline {
         stage("Docker build"){
             steps{
                 script {
-                    dockerImage = docker.build imagename
+                    dockerImage = docker.build registry
                 }
             }
         }
         stage("Push Image to Nexus Hub"){
             steps{
                 script {
-                    docker.withRegistry( 'http://'+registry, registryCredential ) {
+                    docker.withRegistry( '', registryCredential ) {
                     dockerImage.push("$BUILD_NUMBER")
                     dockerImage.push('latest')
                     }
