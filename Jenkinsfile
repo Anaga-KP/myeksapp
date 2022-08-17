@@ -7,7 +7,7 @@ pipeline {
     environment {     
             imagename = "abdulsukku/docker-new"
             registryCredential = "nexus"
-            registry = "172.31.30.165:8081"
+            registry = "172.31.30.165:8084"
             dockerImage = ''  
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
