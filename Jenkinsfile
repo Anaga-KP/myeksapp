@@ -5,9 +5,8 @@ pipeline {
     }
     agent any
     environment {     
-           // imagename = "abdulsukku/my-image" 
+            imagename = "my-docker-images" 
             registryCredential = "nexus"
-            registry = "172.31.30.165:9090"
             dockerImage = ''
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
@@ -77,7 +76,7 @@ pipeline {
         stage("Docker build"){
             steps{
                 script {
-                    dockerImage = docker.build registry
+                    dockerImage = docker.build imagename
                 }
             }
         }
