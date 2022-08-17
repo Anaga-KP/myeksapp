@@ -93,7 +93,7 @@ pipeline {
         stage("kubernetes deployment"){
             steps{
                 script {
-                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', namespace: '', credentialsId: 'K8' serverUrl: '') {
+                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', namespace: '', credentialsId: 'K8', serverUrl: '') {
                         sh ('kubectl apply -f eks-deployment.yaml')
                     }
                 } 
