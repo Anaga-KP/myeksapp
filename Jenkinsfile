@@ -1,19 +1,6 @@
 pipeline {
    
-   tools {
-        maven 'Maven3'
-    }
     agent any
-    environment {     
-           
-            registryCredential = 'nexus'
-            registry = "172.31.30.165:8083/" 
-            NEXUS_VERSION = "nexus3"
-            NEXUS_PROTOCOL = "http"
-            NEXUS_URL = "172.31.30.165:8081"
-            NEXUS_REPOSITORY = "my-docker-images"
-            NEXUS_CREDENTIAL_ID = "nexus"
-    } 
     stages {
         stage('Cloning Git') {
             steps {
