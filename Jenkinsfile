@@ -22,7 +22,7 @@ pipeline {
                                         ],
                               extensions: [], 
                               userRemoteConfigs: [
-                                                    [credentialsId: 'githubcred', 
+                                                    [credentialsId: 'git', 
                                                      url: 'https://github.com/AbdulShukur007/myeksapp.git'
                                                     ]
                                                  ]
