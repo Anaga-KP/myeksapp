@@ -6,12 +6,12 @@ pipeline {
     environment {     
             imagename = "abdulsukku/docker-new"
             registryCredential = 'nexus'
-            registry = "172.31.9.174:8083/"
+            registry = "172.31.30.165:8083/"
             dockerImage = ''  
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
-            NEXUS_URL = "172.31.9.174:8081"
-            NEXUS_REPOSITORY = "myeksapp"
+            NEXUS_URL = "172.31.30.165:8081"
+            NEXUS_REPOSITORY = "my-maven-release"
             NEXUS_CREDENTIAL_ID = "nexus"
     } 
     stages {
@@ -23,7 +23,7 @@ pipeline {
                                         ],
                               extensions: [], 
                               userRemoteConfigs: [
-                                                    [credentialsId: 'githubcred', 
+                                                    [credentialsId: 'git', 
                                                      url: 'https://github.com/AbdulShukur007/myeksapp.git'
                                                     ]
                                                  ]
@@ -33,7 +33,7 @@ pipeline {
         stage('SonarQube analysis'){
               steps{
                      script{
-                         withSonarQubeEnv('sonarserver') { 
+                         withSonarQubeEnv('sonar') { 
                          sh "mvn sonar:sonar"
                               }
                          timeout(time: 2, unit: 'MINUTES') {
