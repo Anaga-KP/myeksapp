@@ -5,7 +5,7 @@ pipeline {
     }
     agent any
     environment {     
-            imagename = "abdulsukku/docker-new"
+            imagename = "abdulsukku/my-docker-images"
             registryCredential = "nexus"
             registry = "172.31.30.165:8084"
             dockerImage = ''  
