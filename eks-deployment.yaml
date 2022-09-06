@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: anaga-ecr-repo:latest
+          image: 365146239416.dkr.ecr.ap-south-1.amazonaws.com/anaga-ecr-repo
           ports:
             - containerPort: 9090
 ---
