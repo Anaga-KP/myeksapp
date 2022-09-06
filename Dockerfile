@@ -1,5 +1,5 @@
 FROM lolhens/baseimage-openjre
-MAINTAINER ABDUL
+MAINTAINER ANAGA
 LABEL env = dev
 ADD target/springbootApp.jar springbootApp.jar
 EXPOSE 80
