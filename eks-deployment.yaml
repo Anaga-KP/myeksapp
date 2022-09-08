@@ -30,3 +30,5 @@ spec:
       targetPort: 8085
   selector:
     app: ang-springboot
+    
+    
