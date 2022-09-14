@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: Download a WAR File to the Tomcat webapps directory to be deployed
+     maven_artifact:
+       group_id: com.tcs.angularjs
+       artifact_id: springbootApp
+       extension: jar
+       repository_url: 'http://65.2.140.54:8081/repository/maven-releases/'
+       username: admin
+       password: Anagha123@*
+       dest: /opt/apache-tomcat-9.0.65/webapps
