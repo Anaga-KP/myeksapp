@@ -9,6 +9,17 @@
     <packaging>jar</packaging>
     <name>MyAwesomeApp</name>
     <description>SpringBoot Angularjs</description>
+	
+    <distributionManagement>
+  	<repository>
+    	<id>nexus-release</id>
+	<url>http://3.95.33.150:8081/repository/maven-releases/</url>
+	</repository>
+	<snapshotRepository>
+	<id>nexus-snapshots</id>
+	<url>http://3.95.33.150:8081/repository/maven-snapshots/</url>
+	</snapshotRepository>
+    </distributionManagement>
  
     <parent>
         <groupId>org.springframework.boot</groupId>
