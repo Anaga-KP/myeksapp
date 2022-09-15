@@ -10,4 +10,4 @@
        repository_url: 'http://65.2.183.95:8081/repository/maven-releases/'
        username: admin
        password: Anagha123@*
-       dest: /opt/apache-tomcat-9.0.65/webapps
+       dest: /opt/apache-tomcat-9.0.65/webapps/springbootApp/WEB-INF/lib/
