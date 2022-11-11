@@ -15,21 +15,6 @@ pipeline {
                 sh 'mvn clean install'           
             }
         }
-       
-        stage('SonarQube analysis'){
-              steps{
-                     script{
-                         withSonarQubeEnv('sonarserver') { 
-                         sh "mvn sonar:sonar"
-                              }
-                         timeout(time: 2, unit: 'MINUTES') {
-                              waitForQualityGate abortPipeline: true
-                              }
-                         
-                      }
-               }
-        }
-    
      
     }
  }
